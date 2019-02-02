@@ -1,7 +1,8 @@
-# Exercize Countdown
-
+# Exercise Countdown
 > A Bruce Project
-> A small exercize to practice javaScript and CSS
+
+# Purpose
+> A small exercise to practice javaScript and CSS
 
 # What does it do? 
   1. Clicking the screen will start a countdown from 10. Box disappears when it reaches 0. 
