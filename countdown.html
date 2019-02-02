@@ -1,0 +1,75 @@
+<!Doctype html> 
+<html> 
+<head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+    var dblwait = 300,
+        dblclicked = 0,
+        countRate = 1000,
+        elementBin = [];
+    $(document).ready(function(){
+    $('body').on('click', onclick).on('dblclick', ondblclick)
+    });           
+    function onclick (event){
+        let $this = $(this);
+        console.log(dblclicked)
+        setTimeout( async function(){
+        if (!dblclicked){
+            console.log('makes element')
+            var element = $('<p>').css({'position': 'fixed',
+                        'top' : String(event.clientY + parseInt($this.css('margin-top')))+ 'px', 
+                        'left': String(event.clientX + parseInt($this.css('margin-left')))+ 'px',
+                        'font-size': '30px', 
+                        "height": "50px", 
+                        "width": "70px" ,
+                        "background-color": "yellow"}).text('10');
+                element.countRate = 1000;
+                elementBin.push(element);
+            $this.append(element);
+            await countdownMaster(element);
+            } else {
+                dblclicked -= 1 
+                console.log(dblclicked);
+            }
+        }, dblwait );
+    }
+    function ondblclick (event) {
+        dblclicked = 2;
+        console.log('doubleclick fired')
+        console.log(dblclicked)
+        if (event.shiftKey  = true) {
+            elementBin.forEach(function(element) {element.countRate -= 900; 
+    })
+}}
+
+async function countdownMaster (element) {
+        for(var i=9; i>=0; i--) {
+            await new Promise( function( resolve, reject){
+                setTimeout( function(){console.log(element.countRate); resolve(i)}, element.countRate);
+            }).then( function(cnt) {
+                element.text(cnt);
+            });
+        }
+        element.remove();
+}
+</script>
+<style>
+    html
+    {
+        background-color: white;
+    }
+    body
+    {
+        background-color:                   blue;
+        font-family:      TradeGothic, sans-serif;
+        padding:                            0px;
+        position:                        absolute;
+        height:                             2000px;
+        width:                             1650px;
+    }
+</style>
+</head>
+<body>
+
+</body>
+</html>
